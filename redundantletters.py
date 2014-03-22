@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 import string
+import os
+
+
+automorphPATH = "en-es.automorf.bin"
+
 
 #return true if all characters are ponctuations.
 def isPunctuation(str):
@@ -37,6 +42,24 @@ def omitredundant(str):
 	else:
 		return [str]	
 		
+######################################### PART 2 ################################################
+
+#check dictionary for the the unknown flag "/*" returns boolean
+def isUnknown(str):
+	return os.popen("echo \""+ str +"\" | lt-proc " +automorphPATH).read()[len(str)+1: len(str)+3] == "/*"
+
+#filter list according the isUnknown function test 		
+def discardUnknowns(lstCand):
+	return [item for item in lstCand if not isUnknown(item)]
+
+#print the list of filtered candidates.
+def outputResults(str):
+	print discardUnknowns(omitredundant(str))
 	
-print omitredundant("??????!!!!!!")
-print omitredundant("Helllllllloooooooo")
+	
+	
+outputResults("hellllllooooo")
+outputResults("meeeeettttttt")
+outputResults("Faaaaaantaaaaaastiiiiccccccccc")
+outputResults("!!!!!!!!!!!!")
+
