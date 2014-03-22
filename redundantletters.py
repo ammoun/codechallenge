@@ -2,12 +2,12 @@
 import string
 
 #return true if all characters are ponctuations.
-def isPonctuation(str):
+def isPunctuation(str):
 	return all(x in string.punctuation for x in str)
 
 
 def omitredundant(str):
-	if not isPonctuation(str):
+	if not isPunctuation(str):
 		candidates = [""]
 		i= 0
 		while i < len(str):	
